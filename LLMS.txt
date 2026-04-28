@@ -1,0 +1,16 @@
+LLM -> is the statical language model trained on a massive amount of data,
+that can be used to generate and translate
+text and other content.
+
+Autoregressive generation = generating a sequence by repeatedly predicting the next 
+token using all previously generated tokens (including your own outputs).
+
+A Transformer is a neural network architecture that reads the entire input at once
+ and figures out which words matter most to each other using something called attention.
+
+RLHF (Reinforcement Learning from Human Feedback) is a training method where a model 
+is optimized to produce outputs that humans prefer, using a learned reward signal.
+
+
+tiktoken is OpenAI’s fast BPE(Byte per encoding) tokenizer for OpenAI models
+tiktoken = a tool that converts text into “tokens” (small pieces) and counts them.
