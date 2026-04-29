@@ -14,3 +14,53 @@ is optimized to produce outputs that humans prefer, using a learned reward signa
 
 tiktoken is OpenAI’s fast BPE(Byte per encoding) tokenizer for OpenAI models
 tiktoken = a tool that converts text into “tokens” (small pieces) and counts them.
+
+
+----------------------------------------------------------------------------------------------------------------
+Prompt Engineering
+    Who is the AI? (Role)
+    What should it do? (Task)
+    What info does it need? (Context) (some background information)
+    Any limits? (Constraints)
+    How should output look? (Format)
+    ex - 
+        You are a senior software engineer.
+
+        Task: Explain binary search.
+
+        Context: I know basic C++ but struggle with logic.
+
+        Constraints:
+        - Use simple language
+        - Include example
+        - Explain time complexity
+
+        Output Format:
+        1. Explanation
+        2. Code
+        3. Dry run
+
+
+
+        ---
+            You are a software engineer.
+
+            Task: Answer coding interview questions.
+
+            Context: Questions may be tricky or incomplete.
+
+            Constraints:
+            - Answer step by step
+            - If you are not sure, say "I’m not sure"
+            - Do not guess
+
+            example: 
+
+            Output Format:
+            - Explanation
+            - Final Answer
+
+    Zero shot ex- convert 10 in hindi , sumrize a text
+    one shit ex - give one example 
+    2 shot ex -  gaurav in hind and thankyou in hindi 
+    few shit - give more clear
