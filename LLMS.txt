@@ -60,7 +60,81 @@ Prompt Engineering
             - Explanation
             - Final Answer
 
-    Zero shot ex- convert 10 in hindi , sumrize a text
+    Zero shot ex- convert 10 in hindi , summrize a text
     one shit ex - give one example 
     2 shot ex -  gaurav in hind and thankyou in hindi 
     few shit - give more clear
+
+----------------------------------------------------------------------------------------------------------
+COT- Change of thought
+Chain-of-Thought (CoT) is a method that guides an AI model to reason step by step,
+producing a sequence of logical steps that lead to the final answer.
+
+self consistency
+Self-Consistency is a technique where the model generates multiple independent reasoning paths (CoT answers)
+for the same question and then selects the most common (majority) final answer.
+
+Fore JSON
+We force the AI to reply only in valid JSON format—structured, machine-readable, and with no extra text.
+-----------------------------------------------------------------------------------------------------------
+
+Temperature in LLMS
+The temperature setting is a key way to control how creative or predictable a model’s responses are.
+ When you send a prompt to an LLM, the model can  many possible outputs.
+  The temperature parameter lets you adjust how much randomness the model uses when picking its next word or phrase. 
+  A low temperature makes the model more focused and deterministic,
+ while a higher temperature encourages more variety and creativity in the responses.
+ Temperature parameter is a number, usually between 0 and 2, 
+ that you can set when generating text with an LLM.
+
+
+ If you set the temperature above 1, the model becomes even more random and unpredictable.
+
+
+---------------------------------------------------------------------------------------------------------------
+How Models Learn Embeddings
+
+    Models like:
+
+    Word2Vec
+    GloVe
+    BERT
+
+
+----
+Similarity ≈ 1   → very similar
+Similarity ≈ 0   → unrelated
+Similarity < 0   → opposite
+
+
+OpenAI text-embedding-3-small: 1536 dimensions, very cheap, excellent quality
+ext-embedding-3-large - better accuracy
+Sentence-BERT (SBERT)
+
+
+----------------------------------------------------------
+Dimension = number of features defined by model
+
+ANN (Approximate Nearest Neighbors)
+ANN = a fast way to find “closest vectors” without checking everything exactly
+    Imagine:
+
+    1 million vectors
+    Each vector = 768 dimensions
+
+
+
+FAISS (Facebook AI Similarity Search) is an open-source library designed for efficient similarity search and 
+clustering of dense, high-dimensional vectors
+It creates:
+
+👉 A graph where each vector stores links to its closest neighbors
+
+example ->  we have 1Billion records
+    But still:
+
+        Each node → ~10–50 neighbors only
+        Search path → ~log(N) steps (~30–50 steps)
+        ~50 steps × 50 neighbors ≈ 2500 comparisons
+
+        
