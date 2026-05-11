@@ -2,7 +2,7 @@ LLM -> is the statical language model trained on a massive amount of data,
 that can be used to generate and translate
 text and other content.
 
-Autoregressive generation = generating a sequence by repeatedly predicting the next 
+Auto regressive generation = generating a sequence by repeatedly predicting the next 
 token using all previously generated tokens (including your own outputs).
 
 A Transformer is a neural network architecture that reads the entire input at once
@@ -109,7 +109,7 @@ Similarity < 0   → opposite
 
 OpenAI text-embedding-3-small: 1536 dimensions, very cheap, excellent quality
 ext-embedding-3-large - better accuracy
-Sentence-BERT (SBERT)
+Sentence-BERT (SBERT)Bidirectional Encoder Representations from Transformers.
 
 
 ----------------------------------------------------------
@@ -137,4 +137,27 @@ example ->  we have 1Billion records
         Search path → ~log(N) steps (~30–50 steps)
         ~50 steps × 50 neighbors ≈ 2500 comparisons
 
-        
+OLLAMA - Tool that run ai models on your laptp
+LLAMA - Brain answer the question   
+
+-------------------------------------------------
+GPT-4o (“o” = omni) is a powerful, all-in-one AI model
+Key features:
+Works with text + images + audio (multimodal)
+Very smart reasoning + coding + writing
+Faster and cheaper than older GPT-4
+Can handle long context (~128K tokens)
+
+
+--
+GPT-4o-mini
+This is a smaller, faster, cheaper version
+Key features:
+Same type of tasks (text + image)
+Much cheaper + faster
+Slightly less powerful than GPT-4o
+Designed for high-volume simple tasks
+
+
+-----------------------------------------------------
+Model Card = Documentation + Warning + Performance report
