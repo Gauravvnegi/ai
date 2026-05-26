@@ -161,3 +161,29 @@ Designed for high-volume simple tasks
 
 -----------------------------------------------------
 Model Card = Documentation + Warning + Performance report
+-----------------------------------------------
+RAG 
+RAG is a technique where external relevant documents are retrieved and supplied as context to the LLM before generation,
+helping produce accurate and grounded responses while reducing hallucinations.
+
+-----------------------------------------
+Naive RAG vs Advanced RAG vs Modular RAG — know these terms for interviews
+
+Naive RAG is the simplest retrieval pipeline where retrieved chunks are directly appended 
+to the prompt without advanced optimization or reasoning.
+
+----
+Advanced Search
+Advanced RAG enhances basic RAG using techniques like reranking, hybrid search(vector search + keyword search), 
+query rewriting, 
+and context compression to improve retrieval quality and grounded generation
+In Advanced RAG, the system first improves the user query using query rewriting. Then it retrieves relevant 
+data using both semantic search(Searching by understanding the meaning of the sentence instead of matching exact words)
+and keyword search (hybrid retrieval). After that, the best results 
+are re-ranked and unnecessary information is removed through context compression(removing unnecessary part and re occuring). 
+Finally, the cleaned context is added to the prompt, 
+and the LLM generates a more accurate, grounded answer with fewer hallucinations.
+----
+
+Modular RAG 
+Full scalable architecture with independent components and agents/tools support.
