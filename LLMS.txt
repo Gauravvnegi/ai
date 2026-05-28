@@ -187,3 +187,27 @@ and the LLM generates a more accurate, grounded answer with fewer hallucinations
 
 Modular RAG 
 Full scalable architecture with independent components and agents/tools support.
+
+
+
+-----------------------------------------------------------------------------------------------------
+PyMuPDF (imported as fitz) is one of the fastest and most reliable PDF processing libraries in Python, but 
+there’s an important nuance:
+It is excellent for text extraction and layout access, but it does NOT automatically “understand”
+tables or structured columns like a human or specialized ML tools do.
+
+python-docx is the standard Python library to read and write .docx (Microsoft Word) files. 
+Its real power is that it doesn’t just extract text — it also exposes structure + styles + formatting metadata.
+
+
+
+
+
+-----------------------------------------------------
+Chuncking 
+| Type                   | Simple Meaning                            | Example                                                                    |
+| ---------------------- | ----------------------------------------- | -------------------------------------------------------------------------- |
+| **Fixed chunking**     | Cut text after fixed size                 | Every 100 words make a new chunk                                           |
+| **Recursive chunking** | First try big splits, then smaller splits | First split by paragraph, if too big then by line, then by words           |
+| **Semantic chunking**  | Split when topic changes                  | Keep “cats” sentences together and “Python programming” sentences together |
+
