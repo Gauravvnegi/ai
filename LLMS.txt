@@ -177,7 +177,7 @@ Advanced Search
 Advanced RAG enhances basic RAG using techniques like reranking, hybrid search(vector search + keyword search), 
 query rewriting, 
 and context compression to improve retrieval quality and grounded generation
-In Advanced RAG, the system first improves the user query using query rewriting. Then it retrieves relevant 
+In Advanced RAG, the system first improves the user query using query rewriting. Thenf it retrieves relevant 
 data using both semantic search(Searching by understanding the meaning of the sentence instead of matching exact words)
 and keyword search (hybrid retrieval). After that, the best results 
 are re-ranked and unnecessary information is removed through context compression(removing unnecessary part and re occuring). 
@@ -211,3 +211,244 @@ Chuncking
 | **Recursive chunking** | First try big splits, then smaller splits | First split by paragraph, if too big then by line, then by words           |
 | **Semantic chunking**  | Split when topic changes                  | Keep “cats” sentences together and “Python programming” sentences together |
 
+
+
+----------------------------------------------------
+# RAG + FAISS Quick Revision Notes
+
+## 1. PDF Ingestion Flow
+
+PDF
+→ Extract Text
+→ Chunking
+→ Embeddings
+→ FAISS / Vector Database
+→ Ready for Search
+
+Example:
+
+PDF Upload
+↓
+100 Pages Text
+↓
+500 Chunks
+↓
+500 Embeddings
+↓
+Stored in FAISS
+
+---
+
+## 2. What is an Embedding?
+
+Embedding = Numerical representation of text.
+
+Example:
+
+"Azure Synapse"
+↓
+[0.45, 0.78, 0.12, ...]
+
+Similar text produces similar vectors.
+
+---
+
+## 3. What is FAISS?
+
+FAISS (Facebook AI Similarity Search)
+
+* Open-source vector search library developed by Meta.
+* Stores and searches embeddings efficiently.
+* Runs inside the application.
+* No separate database server required.
+* Supports CPU and GPU.
+
+Interview Definition:
+
+"FAISS is a vector similarity search library used to store and retrieve embeddings based on nearest-neighbor search."
+
+---
+
+## 4. Where Does FAISS Store Data?
+
+### In Memory (RAM)
+
+index.add(vectors)
+
+* Fast searching
+* Data lost when application stops
+
+### On Disk
+
+faiss.write_index(index, "index.faiss")
+
+Creates:
+
+index.faiss
+
+Can be loaded later:
+
+faiss.read_index("index.faiss")
+
+---
+
+## 5. Query Flow in RAG
+
+User Question
+↓
+Create Embedding
+↓
+Search FAISS
+↓
+Retrieve Similar Chunks
+↓
+Send Chunks + Question to LLM
+↓
+Generate Answer
+
+Example:
+
+"What is Azure Synapse?"
+↓
+Question Embedding
+↓
+FAISS Search
+↓
+Relevant Chunks Found
+↓
+GPT Generates Answer
+
+---
+
+## 6. What Happens After Shutdown?
+
+If Index Only in RAM:
+
+Application Stops
+↓
+Data Lost
+
+If Saved to Disk:
+
+index.faiss
+chunks.json
+
+remain on disk.
+
+After restart:
+
+Load Files
+↓
+Search Works Immediately
+
+No need to process PDF again.
+
+---
+
+## 7. Why Store Chunks Separately?
+
+FAISS mainly stores vectors.
+
+Original text is usually stored in:
+
+* JSON
+* SQLite
+* PostgreSQL
+* Vector Database Metadata
+
+Example:
+
+FAISS
+→ Embeddings
+
+chunks.json
+→ Original Text
+
+---
+
+## 8. Common Vector Databases
+
+Local / Learning:
+
+* FAISS
+* ChromaDB
+
+Production:
+
+* Pinecone
+* Qdrant
+* Weaviate
+* Azure AI Search
+* Databricks Vector Search
+* MongoDB Vector Search
+
+---
+
+## 9. Difference Between FAISS and Vector Database
+
+FAISS:
+
+* Library
+* Runs locally
+* No server
+* Good for learning and prototypes
+
+Vector Database:
+
+* Full database system
+* Stores vectors + metadata
+* Persistent storage
+* Security and scaling
+* Used in production
+
+---
+
+## 10. Complete RAG Architecture
+
+Documents
+↓
+Chunking
+↓
+Embeddings
+↓
+Vector Store (FAISS / Vector DB)
+↓
+User Query
+↓
+Embedding
+↓
+Similarity Search
+↓
+Relevant Chunks Retrieved
+↓
+LLM
+↓
+Final Answer
+
+---
+
+## One-Line Interview Answer
+
+"RAG works by converting documents into embeddings, storing them in a vector store such as FAISS, 
+retrieving the most relevant chunks for a user query, and providing those chunks to an LLM to generate an 
+accurate answer."
+
+
+----
+
+
+ChromaDB is open source vector db design for ai application and rag
+
+
+Chunking - 
+    ex-> 1000 words in first chunk and 200 or 300 word of first chunk and than another 1000 words
+            Semantic Chunking = keeping text with the same meaning/topic together in one chunk rather
+            than splitting strictly by word count.
+
+RAG (Retrieval-Augmented Generation) is an AI architecture where relevant information is first retrieved from 
+external knowledge sources (such as PDFs, documents, databases, or websites) and then combined with the user's query 
+in a prompt. This enriched prompt is sent to the LLM, which uses the retrieved context to generate an accurate
+ and context-aware response.
+
+
+ Source Citation - > means give meta data also extact source from where it is retreive
